@@ -1,0 +1,11 @@
+{
+    "name" : "Drivers",
+    "author" : "Bernard Xiong <bernard.xiong@gmail.com>",
+    "source_files" : ["*.c"],
+
+    "CPPPATH" : ["."],
+    "LINKFLAGS" : [],
+    "LIBPATH" : [],
+    "LIBS" : []
+}
+

@@ -2,6 +2,10 @@
 
 #include <wifi.h>
 
+#ifdef RT_USING_DFS
+#include <dfs_fs.h>
+#endif
+
 #define AP_SSID              "WRTnode_Schumy"
 #define AP_PASS              "63483550"
 #define AP_SEC               WICED_SECURITY_WPA2_MIXED_PSK
@@ -19,6 +23,19 @@ int main(int argc, char** argv)
     wiced_result_t result;
 
     printf("Hello RT-Thread!\n");
+
+    /* Filesystem Initialization */
+#if defined(RT_USING_DFS) && defined(RT_USING_DFS_ELMFAT)
+    /* mount flash fat partition 1 as root directory */
+    if (dfs_mount("flash", "/", "elm", 0, 0) == 0)
+    {
+        rt_kprintf("File System initialized!\n");
+    }
+    else
+    {
+        rt_kprintf("File System initialzation failed!\n");
+    }
+#endif /* RT_USING_DFS && RT_USING_DFS_ELMFAT */
 
     {
         GPIO_InitTypeDef gpio_init_structure;

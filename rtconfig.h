@@ -76,14 +76,29 @@
 #define FINSH_USING_DESCRIPTION
 
 /* SECTION: device filesystem */
-/* #define RT_USING_DFS */ 
+#define RT_USING_DFS 
+#define RT_USING_DFS_DEVFS
+/* support fatfs */
 #define RT_USING_DFS_ELMFAT
+/* make sure only one thread can WR in one time, fix reentry problem */
 #define RT_DFS_ELM_REENTRANT
 #define RT_DFS_ELM_WORD_ACCESS
+/* number of volumes to be used */
 #define RT_DFS_ELM_DRIVES			1
+/* long file name. 
+    mode 1: use static buffer, may cause reentry problem
+    mode 2: use stack, need large stack
+    mode 3: use heap, the most safe one */
 #define RT_DFS_ELM_USE_LFN			2
 #define RT_DFS_ELM_MAX_LFN			255
+#define RT_DFS_ELM_CODE_PAGE        437
+/* need meet flash data sheet spec. One page = 4096 Bytes */
 #define RT_DFS_ELM_MAX_SECTOR_SIZE  		4096
+
+/* Art wifi use SPI flash W25Qxx, enable driver */
+#define RT_USING_SPI
+#define SPI_USING_DMA
+#define RT_USING_W25QXX
 
 /* the max number of mounted filesystem */
 #define DFS_FILESYSTEMS_MAX			2
